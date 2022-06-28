@@ -1,9 +1,10 @@
 import * as React from "react";
 import "./App.css";
 import profilePic from "./assets/profile.jpg";
-// import Instagram from "assets/instagram.svg";
-// import linkedin from "./assets/linkedin.svg";
-// import { ReactComponent as twitterSvg } from "./assets/twitter.svg";
+import Box from "components/Box";
+//import Instagram from "assets/instagram.svg";
+//import linkedin from "./assets/linkedin.svg";
+//import { ReactComponent as twitterSvg } from "./assets/twitter.svg";
 
 export default function App() {
   return (
@@ -98,7 +99,6 @@ export default function App() {
             projects development.
           </p>
         </div>
-
         <div id="articles" className="article box1">
           <h1 className="title">Articles</h1>
 
@@ -1115,7 +1115,11 @@ export default function App() {
         </div>
         <script src="script.js"></script>
       </body>
-      {/* <Tooltip title="Caixa de teste">
+    </div>
+  );
+}
+
+/* <Tooltip title="Caixa de teste">
         <Box
           sx={{
             height: 10,
@@ -1135,10 +1139,7 @@ export default function App() {
       </Tooltip>
       <Tooltip title="Texto de Teste da Aplicação">
         <p>Daniel Luiz</p>
-      </Tooltip> */}
-    </div>
-  );
-}
+      </Tooltip> */
 
 // function App() {
 //   return (
