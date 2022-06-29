@@ -116,7 +116,8 @@ body {
   color: #606060;
 }
 
-.articleContainer p {
+.articleContainer p,
+label {
   color: #000000;
   text-align: justify;
   margin: 1rem;
@@ -130,6 +131,16 @@ body {
   box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.16);
   border-radius: 25px;
   text-align: center;
+}
+
+.article button {
+  background-color: rgb(87, 85, 85);
+  color: white;
+  font-size: 20px;
+  padding: 10px 60px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
 }
 
 .main {

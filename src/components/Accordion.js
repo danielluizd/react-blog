@@ -1,13 +1,15 @@
+import { ListItem } from "@mui/material";
 import React, { useState } from "react";
 
-const Accordion = () => {
-  const articles = {
-    title: "How a semantic layer bridges BI and AI by David Mariani",
-    content:
-      "conteudo do artigo 1 somente para testar o accordion e blá blá blá blá One of the biggest complaints from the business is that it takes way too long for IT to build or deliver reports for A semantic layer is a business representation of data that semantic layer provides the following benefits",
-  };
-  const { title, content } = articles;
+const Accordion = ({ title, content }, onClickDelete) => {
+  // const articles = {
+  //   title: "How a semantic layer bridges BI and AI by David Mariani",
+  //   content:
+  //     "conteudo do artigo 1 somente para testar o accordion e blá blá blá blá One of the biggest complaints from the business is that it takes way too long for IT to build or deliver reports for A semantic layer is a business representation of data that semantic layer provides the following benefits",
+  // };
+  // const { title, content } = articles;
   const [openAccordion, setOpenAccordion] = useState(false);
+  onClickDelete = () => console.log("deleted" + " = " + title);
   return (
     <React.Fragment>
       <div className="accordionItem">
@@ -17,7 +19,14 @@ const Accordion = () => {
         >
           <div>{title}</div>
         </h2>
-        {openAccordion && <div className="accordionItemContent">{content}</div>}
+        {openAccordion && (
+          <div className="accordionItemContent">
+            <p className="articleContainer">{content}</p>
+          </div>
+        )}
+        <button type="button" onClick={onClickDelete}>
+          Delete
+        </button>
       </div>
     </React.Fragment>
   );
