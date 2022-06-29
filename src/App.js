@@ -596,7 +596,6 @@ export default function App() {
             </div>
           </div>
           {files.map((item) => {
-            // return <Accordion title={item.title} description={item.description}></Accordion>
             return <Accordion {...item}></Accordion>;
           })}
           <label className="articleContainer">Title</label>
@@ -627,48 +626,3 @@ export default function App() {
     </div>
   );
 }
-
-/* <Tooltip title="Caixa de teste">
-        <Box
-          sx={{
-            height: 10,
-            width: 10,
-            p: "4rem",
-            boxShadow: 2,
-            borderRadius: 3,
-            textAlign: "center",
-            m: "1rem",
-            backgroundColor: "#EEEEEE",
-            "&:hover": {
-              backgroundColor: "#EEEEEE",
-              opacity: [0.9, 0.8, 0.7],
-            },  
-          }}
-        />
-      </Tooltip>
-      <Tooltip title="Texto de Teste da Aplicação">
-        <p>Daniel Luiz</p>
-      </Tooltip> */
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
