@@ -61,8 +61,7 @@ export default function App() {
             </ul>
           </nav>
         </header>
-
-        {/* <div className="container"> */}
+        
         <div id="profile" className="profile box1">
           <img
             className="profile-pic"
