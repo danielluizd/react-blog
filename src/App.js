@@ -130,23 +130,20 @@ export default function App() {
           <input type='text' value={article.description} onChange={(value) => setArticle( {...article, description: value.target.value} )}></input>
           <button onClick={() => submitArticle()}>Click Me</button>
 
-          {/* <Accordion></Accordion> */}
-        
-          {/* {files.map(item => {
-            <>
-              <p>{item.title}</p>
-              <p>{item.description}</p>
-            </>
-          })} */}
-
+          
           {files.map(item => {
+            // return <Accordion title={item.title} description={item.description}></Accordion>
+            return <Accordion {...item}></Accordion>
+          })}
+
+          {/* {files.map(item => {
             return (
               <>
                 <p>{item.title}</p>
                 <p>{item.description}</p>
               </>
             )
-          })}
+          })} */}
 
         </div>
         <script src="script.js"></script>
