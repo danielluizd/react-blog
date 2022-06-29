@@ -3,6 +3,7 @@ import "./App.css";
 import profilePic from "./assets/profile.jpg";
 import Box from "components/Box";
 import Card from "components/Card";
+import Accordion from "components/Accordion";
 //import Instagram from "assets/instagram.svg";
 //import linkedin from "./assets/linkedin.svg";
 //import { ReactComponent as twitterSvg } from "./assets/twitter.svg";
@@ -101,9 +102,8 @@ export default function App() {
           </p>
         </div>
         <div id="articles" className="article box1">
-          <Card></Card>
           <h1 className="title">Articles</h1>
-
+          <Accordion></Accordion>
           <div className="accordionWrapper">
             <div className="accordionItem hidden">
               <h2 className="accordionItemTitle">
