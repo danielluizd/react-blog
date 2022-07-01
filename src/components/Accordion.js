@@ -11,6 +11,20 @@ const Accordion = ({ title, description, files, setFiles, index/*, deleteArticle
 
   const deleteArticle2 = () => {
     const itens = files.filter((a, i) => i !== index)
+
+    /* JS
+      .map
+      .filter
+      .indexOf
+      .remove
+      .foreach
+
+      .foreach() diff .map() ?
+
+      .reduce
+    */
+
+
     setFiles(itens)
   }
 
