@@ -30,6 +30,16 @@ export default function App() {
     console.log('files', files)
   }
 
+  const deleteArticles = (index) => {
+
+    const itens = files.filter((item, indexArticle) => indexArticle !== index);
+    setFiles(itens);
+
+    // console.log('itens', itens);
+
+    // console.log('click me delete article', files[index])
+  }
+
   return (
     <div className="back-image">
       <body>
@@ -131,9 +141,14 @@ export default function App() {
           <button onClick={() => submitArticle()}>Click Me</button>
 
           
-          {files.map(item => {
+          {files.map((item, index) => {
             // return <Accordion title={item.title} description={item.description}></Accordion>
-            return <Accordion {...item}></Accordion>
+            return (
+              <>
+                <Accordion {...item} files={files} setFiles={setFiles} index={index}/*deleteArticle={deleteArticles} id={index}*/></Accordion>
+                {/* <button onClick={() => deleteArticles(index)}>Click Me</button> */}
+              </>
+            )
           })}
 
           {/* {files.map(item => {

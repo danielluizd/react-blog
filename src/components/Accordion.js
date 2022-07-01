@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Accordion = ({ title, description }) => {
+const Accordion = ({ title, description, files, setFiles, index/*, deleteArticle, id*/ }) => {
   // const articles = {
   //   title: "How a semantic layer bridges BI and AI by David Mariani",
   //   content:
@@ -8,6 +8,11 @@ const Accordion = ({ title, description }) => {
   // };
   // const { title, content } = articles;
   const [openAccordion, setOpenAccordion] = useState(false);
+
+  const deleteArticle2 = () => {
+    const itens = files.filter((a, i) => i !== index)
+    setFiles(itens)
+  }
 
   return (
     <React.Fragment>
@@ -20,6 +25,8 @@ const Accordion = ({ title, description }) => {
         </h2>
         {openAccordion && <div className="accordionItemContent">{description}</div>}
       </div>
+      {/* <button onClick={() => deleteArticle(id)}>Click Me</button> */}
+      <button onClick={() => deleteArticle2()}>Click Me</button>
     </React.Fragment>
   );
 };
