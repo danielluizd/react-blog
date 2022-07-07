@@ -1,9 +1,8 @@
 import { ListItem } from "@mui/material";
-import React, { useState } from "react";
+import React, { Children, useState } from "react";
 
-const Accordion = ({ title, content }, onClickDelete) => {
+const Accordion = ({ title, content,children }) => {
   const [openAccordion, setOpenAccordion] = useState(false);
-  onClickDelete = () => console.log("deleted" + " = " + title);
   return (
     <React.Fragment>
       <div className="accordionItem">
@@ -16,11 +15,9 @@ const Accordion = ({ title, content }, onClickDelete) => {
         {openAccordion && (
           <div className="accordionItemContent">
             <p className="articleContainer">{content}</p>
+            {children}
           </div>
         )}
-        <button type="button" onClick={onClickDelete}>
-          Delete
-        </button>
       </div>
     </React.Fragment>
   );

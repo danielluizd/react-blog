@@ -124,6 +124,12 @@ label {
   line-height: 1.5rem;
 }
 
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  place-items: start;
+}
+
 .box1 {
   background: #eee;
   padding: 4rem;
@@ -136,10 +142,10 @@ label {
 .article button {
   background-color: rgb(87, 85, 85);
   color: white;
-  font-size: 20px;
-  padding: 10px 60px;
-  border-radius: 5px;
-  margin: 10px 0px;
+  font-size: 0.7rem;
+  padding: 8px 8px;
+  border-radius: 10px;
+  margin: 10px 10px;
   cursor: pointer;
 }
 
