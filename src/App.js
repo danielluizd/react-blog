@@ -16,15 +16,34 @@ export default function App() {
 
   const [files, setFiles] = useState([
     {
-      title: "Testando Artigo Pré Renderizado",
+      title: "How a semantic layer bridges BI and AI",
       content:
-        "Developed some researches, as a production of a low-cost drone using a 3D printer, for example. Nowadays, I am in the last year of Mechatronics Engineering, where I am looking for a job in any other area alike. I've already been part of some researches groups where I was able to project power plants, which was very important to build my knowledge in the area that I do well. During my free time I study subjects related to electric and control projects development.",
+        "Augmented intelligence has the power to transform businesses into data-driven organizations. This starts with implementing the appropriate processes and tools to democratize data and empower individuals to utilize data through self-service analytics. Ultimately, every organization wants to empower every individual to make data-driven decisions. A semantic layer can become the vehicle for delivering augmented intelligence to a broader audience by publishing the results of data science programs through existing BI channels. By feeding data science model results back into the semantic layer, your organization can capture benefits beyond just historical analysis. Decision makers can consume predictive insights alongside historical data. They can also use the same governed data to reliably “drill down” into the details of a prediction. As a result, your organization can foster more self-service and greater data science literacy and generate a better return on data science investments.",
+    },
+    {
+      title: "3G must die so 5G can live",
+      content:
+        "Augmented intelligence has the power to transform businesses into data-driven organizations. This starts with implementing the appropriate processes and tools to democratize data and empower individuals to utilize data through self-service analytics. Ultimately, every organization wants to empower every individual to make data-driven decisions. A semantic layer can become the vehicle for delivering augmented intelligence to a broader audience by publishing the results of data science programs through existing BI channels. By feeding data science model results back into the semantic layer, your organization can capture benefits beyond just historical analysis. Decision makers can consume predictive insights alongside historical data. They can also use the same governed data to reliably “drill down” into the details of a prediction. As a result, your organization can foster more self-service and greater data science literacy and generate a better return on data science investments.",
+    },
+    {
+      title: "Ukraine defense ministry, banks hit by cyberattacks",
+      content:
+        "Augmented intelligence has the power to transform businesses into data-driven organizations. This starts with implementing the appropriate processes and tools to democratize data and empower individuals to utilize data through self-service analytics. Ultimately, every organization wants to empower every individual to make data-driven decisions. A semantic layer can become the vehicle for delivering augmented intelligence to a broader audience by publishing the results of data science programs through existing BI channels. By feeding data science model results back into the semantic layer, your organization can capture benefits beyond just historical analysis. Decision makers can consume predictive insights alongside historical data. They can also use the same governed data to reliably “drill down” into the details of a prediction. As a result, your organization can foster more self-service and greater data science literacy and generate a better return on data science investments.",
+    },
+    {
+      title:
+        "Netlify Graph helps eliminate ‘messy backend integration work’ for third-party APIs",
+      content:
+        "Augmented intelligence has the power to transform businesses into data-driven organizations. This starts with implementing the appropriate processes and tools to democratize data and empower individuals to utilize data through self-service analytics. Ultimately, every organization wants to empower every individual to make data-driven decisions. A semantic layer can become the vehicle for delivering augmented intelligence to a broader audience by publishing the results of data science programs through existing BI channels. By feeding data science model results back into the semantic layer, your organization can capture benefits beyond just historical analysis. Decision makers can consume predictive insights alongside historical data. They can also use the same governed data to reliably “drill down” into the details of a prediction. As a result, your organization can foster more self-service and greater data science literacy and generate a better return on data science investments.",
+    },
+    {
+      title: "Big Tech backlash gives rise to the independent cloud",
+      content:
+        "Augmented intelligence has the power to transform businesses into data-driven organizations. This starts with implementing the appropriate processes and tools to democratize data and empower individuals to utilize data through self-service analytics. Ultimately, every organization wants to empower every individual to make data-driven decisions. A semantic layer can become the vehicle for delivering augmented intelligence to a broader audience by publishing the results of data science programs through existing BI channels. By feeding data science model results back into the semantic layer, your organization can capture benefits beyond just historical analysis. Decision makers can consume predictive insights alongside historical data. They can also use the same governed data to reliably “drill down” into the details of a prediction. As a result, your organization can foster more self-service and greater data science literacy and generate a better return on data science investments.",
     },
   ]);
   const submitArticle = () => {
-    console.log("article", article);
     setFiles([...files, article]);
-    console.log("files", files);
   };
 
   const deleteArticles = (index) => {
@@ -128,25 +147,24 @@ export default function App() {
           {files.map((item, index) => {
             return (
               <>
-                <Accordion {...item}><button onClick={() => deleteArticles(index)}>Delete</button></Accordion>
+                <Accordion {...item}>
+                  <button onClick={() => deleteArticles(index)}>Delete</button>
+                </Accordion>
                 {/* <button onClick={() => deleteArticles(index)}>Delete</button> */}
               </>
             );
           })}
 
           <div className="formContainer">
-            <div className="formControl">
-              <label className="articleContainer">Title</label>
-              <input
-                type="text"
-                placeholder="Enter a title"
-                value={article.title}
-                onChange={(value) =>
-                  setArticle({ ...article, title: value.target.value })
-                }
-              ></input>
-            </div>
-            <div className="formControl">
+            <label className="articleContainer">Title</label>
+            <input
+              type="text"
+              placeholder="Enter a title"
+              value={article.title}
+              onChange={(value) =>
+                setArticle({ ...article, title: value.target.value })
+              }
+            ></input>
             <label>Content</label>
             <textarea
               type="text"
@@ -158,11 +176,10 @@ export default function App() {
                 setArticle({ ...article, content: value.target.value })
               }
             ></textarea>
-            <button type="submit" onClick={() => submitArticle()}>
-              Submit
-            </button>
-            </div>
           </div>
+          <button type="submit" onClick={() => submitArticle()}>
+            Submit
+          </button>
         </div>
         <script src="script.js"></script>
       </body>

@@ -116,6 +116,12 @@ body {
   color: #606060;
 }
 
+.accordionItemContent p {
+  text-align: justify;
+  padding: 1rem 0rem;
+  color: #524f4f;
+}
+
 .articleContainer p,
 label {
   color: #000000;
@@ -127,7 +133,8 @@ label {
 .formContainer {
   display: flex;
   flex-direction: column;
-  place-items: start;
+  place-ite: start;
+  padding: 20px 0px;
 }
 
 .box1 {
