@@ -21,6 +21,7 @@ export default function App() {
   }, []);
 
   const [article, setArticle] = useState({
+    _id: "",
     title: "",
     content: "",
   });
