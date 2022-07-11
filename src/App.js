@@ -26,27 +26,31 @@ export default function App() {
   });
 
   const [files, setFiles] = useState([]);
+  const [method, setMethod] = useState("");
 
   const submitArticle = async (event) => {
     event.preventDefault();
-    await api.post("articles", article);
+
+    if (method === "patch") {
+      await api.patch(`articles/${article._id}`, article);
+    } else {
+      await api.post("articles", article);
+    }
+
+    setMethod("");
     setArticle({ title: "", content: "" });
     await findAll();
   };
 
   const deleteArticle = async (_id) => {
     setArticle({});
-    const resp = await api.delete(`articles/${_id}`);
+    await api.delete(`articles/${_id}`);
     await findAll();
   };
 
-  const editArticle = async (_id) => {
-    // const edit = await api.put(`articles/${_id}`);
-    // setArticle(`articles/${_id}`);
-    console.log("Botão de Edit funcionando");
-    // console.log({ title.article});
-    await findAll();
-    // setArticle(`${_id}`);
+  const editArticle = async (item) => {
+    setMethod("patch");
+    setArticle(item);
   };
 
   return (
