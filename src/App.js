@@ -1,14 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import profilePic from "./assets/profile.jpg";
 import Box from "components/Box";
 import Card from "components/Card";
 import Accordion from "components/Accordion";
+import axios from "axios";
 //import Instagram from "assets/instagram.svg";
 //import linkedin from "./assets/linkedin.svg";
 //import { ReactComponent as twitterSvg } from "./assets/twitter.svg";
 
 export default function App() {
+  function findAll() {
+    axios
+      .get("https://react-blog-daniel.herokuapp.com/articles")
+      // .get("http://localhost:3000/articles")
+      .then((response) => {
+        setFiles([...files, ...response.data]);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  function createNewArticle() {
+    axios
+      .post("http://localhost:3000/articles", {
+        title: "DANIEL LUIZ",
+        content: "DOURADOS DOURADOS",
+      })
+      .then((response) => {
+        // setFiles([...files, ...response.data]);
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  useEffect(() => {
+    // findAll();
+    createNewArticle();
+  }, []);
+
   const [article, setArticle] = useState({
     title: "",
     content: "",
@@ -147,7 +176,7 @@ export default function App() {
           {files.map((item, index) => {
             return (
               <>
-                <Accordion {...item}>
+                <Accordion {...item} key={index}>
                   <button onClick={() => deleteArticles(index)}>Delete</button>
                 </Accordion>
                 {/* <button onClick={() => deleteArticles(index)}>Delete</button> */}
