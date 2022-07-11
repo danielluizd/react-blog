@@ -36,7 +36,6 @@ export default function App() {
     } else {
       await api.post("articles", article);
     }
-
     setMethod("");
     setArticle({ title: "", content: "" });
     await findAll();
@@ -153,7 +152,7 @@ export default function App() {
                   <button onClick={() => deleteArticle(item._id)}>
                     Delete
                   </button>
-                  <button onClick={() => editArticle(item._id)}>Edit</button>
+                  <button onClick={() => editArticle(item)}>Edit</button>
                 </Accordion>
               </div>
             );
