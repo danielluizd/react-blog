@@ -5,37 +5,19 @@ import Box from "components/Box";
 import Card from "components/Card";
 import Accordion from "components/Accordion";
 import axios from "axios";
-//import Instagram from "assets/instagram.svg";
-//import linkedin from "./assets/linkedin.svg";
-//import { ReactComponent as twitterSvg } from "./assets/twitter.svg";
+
+const api = axios.create({
+  baseURL: "https://react-blog-daniel.herokuapp.com/",
+});
 
 export default function App() {
-  function findAll() {
-    axios
-      .get("https://react-blog-daniel.herokuapp.com/articles")
-      // .get("http://localhost:3000/articles")
-      .then((response) => {
-        setFiles([...files, ...response.data]);
-      })
-      .catch((error) => console.log(error));
-  }
+  const findAll = async () => {
+    const articles = await api.get("articles");
+    setFiles(articles.data);
+  };
 
-  function createNewArticle() {
-    axios
-      .post("http://localhost:3000/articles", {
-        title: "DANIEL LUIZ",
-        content: "DOURADOS DOURADOS",
-      })
-      .then((response) => {
-        // setFiles([...files, ...response.data]);
-        console.log(response);
-      })
-      .catch((error) => console.log(error));
-  }
-
-  useEffect(() => {
-    // findAll();
-    createNewArticle();
+  useEffect(async () => {
+    await findAll();
   }, []);
 
   const [article, setArticle] = useState({
@@ -43,41 +25,28 @@ export default function App() {
     content: "",
   });
 
-  const [files, setFiles] = useState([
-    {
-      title: "How a semantic layer bridges BI and AI",
-      content:
-        "Augmented intelligence has the power to transform businesses into data-driven organizations. This starts with implementing the appropriate processes and tools to democratize data and empower individuals to utilize data through self-service analytics. Ultimately, every organization wants to empower every individual to make data-driven decisions. A semantic layer can become the vehicle for delivering augmented intelligence to a broader audience by publishing the results of data science programs through existing BI channels. By feeding data science model results back into the semantic layer, your organization can capture benefits beyond just historical analysis. Decision makers can consume predictive insights alongside historical data. They can also use the same governed data to reliably “drill down” into the details of a prediction. As a result, your organization can foster more self-service and greater data science literacy and generate a better return on data science investments.",
-    },
-    {
-      title: "3G must die so 5G can live",
-      content:
-        "Augmented intelligence has the power to transform businesses into data-driven organizations. This starts with implementing the appropriate processes and tools to democratize data and empower individuals to utilize data through self-service analytics. Ultimately, every organization wants to empower every individual to make data-driven decisions. A semantic layer can become the vehicle for delivering augmented intelligence to a broader audience by publishing the results of data science programs through existing BI channels. By feeding data science model results back into the semantic layer, your organization can capture benefits beyond just historical analysis. Decision makers can consume predictive insights alongside historical data. They can also use the same governed data to reliably “drill down” into the details of a prediction. As a result, your organization can foster more self-service and greater data science literacy and generate a better return on data science investments.",
-    },
-    {
-      title: "Ukraine defense ministry, banks hit by cyberattacks",
-      content:
-        "Augmented intelligence has the power to transform businesses into data-driven organizations. This starts with implementing the appropriate processes and tools to democratize data and empower individuals to utilize data through self-service analytics. Ultimately, every organization wants to empower every individual to make data-driven decisions. A semantic layer can become the vehicle for delivering augmented intelligence to a broader audience by publishing the results of data science programs through existing BI channels. By feeding data science model results back into the semantic layer, your organization can capture benefits beyond just historical analysis. Decision makers can consume predictive insights alongside historical data. They can also use the same governed data to reliably “drill down” into the details of a prediction. As a result, your organization can foster more self-service and greater data science literacy and generate a better return on data science investments.",
-    },
-    {
-      title:
-        "Netlify Graph helps eliminate ‘messy backend integration work’ for third-party APIs",
-      content:
-        "Augmented intelligence has the power to transform businesses into data-driven organizations. This starts with implementing the appropriate processes and tools to democratize data and empower individuals to utilize data through self-service analytics. Ultimately, every organization wants to empower every individual to make data-driven decisions. A semantic layer can become the vehicle for delivering augmented intelligence to a broader audience by publishing the results of data science programs through existing BI channels. By feeding data science model results back into the semantic layer, your organization can capture benefits beyond just historical analysis. Decision makers can consume predictive insights alongside historical data. They can also use the same governed data to reliably “drill down” into the details of a prediction. As a result, your organization can foster more self-service and greater data science literacy and generate a better return on data science investments.",
-    },
-    {
-      title: "Big Tech backlash gives rise to the independent cloud",
-      content:
-        "Augmented intelligence has the power to transform businesses into data-driven organizations. This starts with implementing the appropriate processes and tools to democratize data and empower individuals to utilize data through self-service analytics. Ultimately, every organization wants to empower every individual to make data-driven decisions. A semantic layer can become the vehicle for delivering augmented intelligence to a broader audience by publishing the results of data science programs through existing BI channels. By feeding data science model results back into the semantic layer, your organization can capture benefits beyond just historical analysis. Decision makers can consume predictive insights alongside historical data. They can also use the same governed data to reliably “drill down” into the details of a prediction. As a result, your organization can foster more self-service and greater data science literacy and generate a better return on data science investments.",
-    },
-  ]);
-  const submitArticle = () => {
-    setFiles([...files, article]);
+  const [files, setFiles] = useState([]);
+
+  const submitArticle = async (event) => {
+    event.preventDefault();
+    await api.post("articles", article);
+    setArticle({ title: "", content: "" });
+    await findAll();
   };
 
-  const deleteArticles = (index) => {
-    const itens = files.filter((item, indexFile) => indexFile !== index);
-    setFiles(itens);
+  const deleteArticle = async (_id) => {
+    setArticle({});
+    const resp = await api.delete(`articles/${_id}`);
+    await findAll();
+  };
+
+  const editArticle = async (_id) => {
+    // const edit = await api.put(`articles/${_id}`);
+    // setArticle(`articles/${_id}`);
+    console.log("Botão de Edit funcionando");
+    // console.log({ title.article});
+    await findAll();
+    // setArticle(`${_id}`);
   };
 
   return (
@@ -173,14 +142,16 @@ export default function App() {
         </div>
         <div id="articles" className="article box1">
           <h1 className="title">Articles</h1>
-          {files.map((item, index) => {
+          {files.map((item) => {
             return (
-              <>
-                <Accordion {...item} key={index}>
-                  <button onClick={() => deleteArticles(index)}>Delete</button>
+              <div key={item._id}>
+                <Accordion {...item}>
+                  <button onClick={() => deleteArticle(item._id)}>
+                    Delete
+                  </button>
+                  <button onClick={() => editArticle(item._id)}>Edit</button>
                 </Accordion>
-                {/* <button onClick={() => deleteArticles(index)}>Delete</button> */}
-              </>
+              </div>
             );
           })}
 
@@ -206,7 +177,7 @@ export default function App() {
               }
             ></textarea>
           </div>
-          <button type="submit" onClick={() => submitArticle()}>
+          <button type="submit" onClick={(event) => submitArticle(event)}>
             Submit
           </button>
         </div>
