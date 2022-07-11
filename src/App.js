@@ -1,44 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import profilePic from "./assets/profile.jpg";
-import Box from "components/Box";
-import Card from "components/Card";
 import Accordion from "components/Accordion";
-//import Instagram from "assets/instagram.svg";
-//import linkedin from "./assets/linkedin.svg";
-//import { ReactComponent as twitterSvg } from "./assets/twitter.svg";
+import axios from 'axios'
+
+const api = axios.create({
+  baseURL: 'https://react-blog-daniel.herokuapp.com/',
+});
 
 export default function App() {
-
   const [article, setArticle] = useState({
-    title: '',
-    description: ''
-  })
+    title: "",
+    content: "",
+  });
+  const [files, setFiles] = useState([]);
 
-  const [files, setFiles] = useState([])
-  // const [files, setFiles] = useState([{title: 'abc', description: 'efg'}, {title: 'asd', description: 'okasd'}])
-
-  // const [title, setTitle] = useState('')
-  // const [description, setDescription] = useState('')
-
-  const submitArticle = () => {
-
-    console.log('article', article)
-
-    setFiles([...files, article])
-
-    console.log('files', files)
+  const getAllArticles = async () => {
+    const articles = await api.get('articles');
+    // setFiles([...files, ...articles.data])
+    setFiles(articles.data)
   }
 
-  const deleteArticles = (index) => {
+  useEffect(async () => {
+    await getAllArticles()
+  }, [])
 
-    const itens = files.filter((item, indexArticle) => indexArticle !== index);
-    setFiles(itens);
+  const submitArticle = async (event) => {
+    event.preventDefault();
 
-    // console.log('itens', itens);
+    await api.post('articles', article)
 
-    // console.log('click me delete article', files[index])
-  }
+    setArticle({
+      title: "",
+      content: "",
+    })
+
+    await getAllArticles();
+
+    //setFiles([...files, article]);
+  };
+
+  const deleteArticles = async (_id) => {
+    // const itens = files.filter((item, indexFile) => indexFile !== index);
+    // setFiles(itens);
+
+    const resp = await api.delete(`articles/${_id}`);
+    console.log('deu bom será ?', resp)
+
+    await getAllArticles();
+  };
 
   return (
     <div className="back-image">
@@ -81,7 +91,6 @@ export default function App() {
           </nav>
         </header>
 
-        {/* <div className="container"> */}
         <div id="profile" className="profile box1">
           <img
             className="profile-pic"
@@ -133,81 +142,45 @@ export default function App() {
           </p>
         </div>
         <div id="articles" className="article box1">
-
-          <label>Title</label>
-          <input type='text' value={article.title} onChange={(value) => setArticle( {...article, title: value.target.value} )}></input>
-          <label>Description</label>
-          <input type='text' value={article.description} onChange={(value) => setArticle( {...article, description: value.target.value} )}></input>
-          <button onClick={() => submitArticle()}>Click Me</button>
-
-          
+          <h1 className="title">Articles</h1>
           {files.map((item, index) => {
-            // return <Accordion title={item.title} description={item.description}></Accordion>
             return (
-              <>
-                <Accordion {...item} files={files} setFiles={setFiles} index={index}/*deleteArticle={deleteArticles} id={index}*/></Accordion>
-                {/* <button onClick={() => deleteArticles(index)}>Click Me</button> */}
-              </>
-            )
+              <div key={item._id}>
+                <Accordion {...item}>
+                  <button onClick={() => deleteArticles(item._id)}>Delete</button>
+                </Accordion>
+              </div>
+            );
           })}
 
-          {/* {files.map(item => {
-            return (
-              <>
-                <p>{item.title}</p>
-                <p>{item.description}</p>
-              </>
-            )
-          })} */}
-
+          <div className="formContainer">
+            <label className="articleContainer">Title</label>
+            <input
+              type="text"
+              placeholder="Enter a title"
+              value={article.title}
+              onChange={(value) =>
+                setArticle({ ...article, title: value.target.value })
+              }
+            ></input>
+            <label>Content</label>
+            <textarea
+              type="text"
+              rows="10"
+              cols="100"
+              placeholder="Enter a content"
+              value={article.content}
+              onChange={(value) =>
+                setArticle({ ...article, content: value.target.value })
+              }
+            ></textarea>
+          </div>
+          <button type="submit" onClick={(event) => submitArticle(event)}>
+            Submit
+          </button>
         </div>
         <script src="script.js"></script>
       </body>
     </div>
   );
 }
-
-/* <Tooltip title="Caixa de teste">
-        <Box
-          sx={{
-            height: 10,
-            width: 10,
-            p: "4rem",
-            boxShadow: 2,
-            borderRadius: 3,
-            textAlign: "center",
-            m: "1rem",
-            backgroundColor: "#EEEEEE",
-            "&:hover": {
-              backgroundColor: "#EEEEEE",
-              opacity: [0.9, 0.8, 0.7],
-            },  
-          }}
-        />
-      </Tooltip>
-      <Tooltip title="Texto de Teste da Aplicação">
-        <p>Daniel Luiz</p>
-      </Tooltip> */
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;

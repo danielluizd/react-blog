@@ -116,11 +116,25 @@ body {
   color: #606060;
 }
 
-.articleContainer p {
+.accordionItemContent p {
+  text-align: justify;
+  padding: 1rem 0rem;
+  color: #524f4f;
+}
+
+.articleContainer p,
+label {
   color: #000000;
   text-align: justify;
   margin: 1rem;
   line-height: 1.5rem;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  place-ite: start;
+  padding: 20px 0px;
 }
 
 .box1 {
@@ -130,6 +144,16 @@ body {
   box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.16);
   border-radius: 25px;
   text-align: center;
+}
+
+.article button {
+  background-color: rgb(87, 85, 85);
+  color: white;
+  font-size: 0.7rem;
+  padding: 8px 8px;
+  border-radius: 10px;
+  margin: 10px 10px;
+  cursor: pointer;
 }
 
 .main {
