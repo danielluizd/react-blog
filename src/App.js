@@ -36,12 +36,12 @@ export default function App() {
       await api.post("articles", article);
     }
     setMethod("");
-    setArticle({ title: "", content: "" });
+    setArticle({ id: "", title: "", content: "" });
     await findAll();
   };
 
   const deleteArticle = async (_id) => {
-    setArticle({});
+    setArticle({ id: "", title: "", content: "" });
     await api.delete(`articles/${_id}`);
     await findAll();
   };
