@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import profilePic from "./assets/profile.jpg";
-import Box from "components/Box";
-import Card from "components/Card";
 import Accordion from "components/Accordion";
 import axios from "axios";
 
