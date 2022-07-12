@@ -5,7 +5,13 @@ import Accordion from "components/Accordion";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://react-blog-daniel.herokuapp.com/",
+  // baseURL: "https://react-blog-daniel.herokuapp.com/",
+  baseURL: "http://localhost:3001/",
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+  },
+  withCredentials: false
 });
 
 export default function App() {
@@ -30,10 +36,11 @@ export default function App() {
   const submitArticle = async (event) => {
     event.preventDefault();
 
-    if (method === "patch") {
-      await api.patch(`articles/${article._id}`, article);
+    const newArticle = {title: article.title, content: article.content}
+    if (method === "put") {
+      await api.put(`articles/${article._id}`, newArticle);
     } else {
-      await api.post("articles", article);
+      await api.post("articles", newArticle);
     }
     setMethod("");
     setArticle({ id: "", title: "", content: "" });
@@ -41,13 +48,13 @@ export default function App() {
   };
 
   const deleteArticle = async (_id) => {
-    setArticle({ id: "", title: "", content: "" });
     await api.delete(`articles/${_id}`);
     await findAll();
+    setArticle({ id: "", title: "", content: "" });
   };
 
   const editArticle = async (item) => {
-    setMethod("patch");
+    setMethod("put");
     setArticle(item);
   };
 

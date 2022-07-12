@@ -133,7 +133,7 @@ label {
 .formContainer {
   display: flex;
   flex-direction: column;
-  place-ite: start;
+  /* place-items: center; */
   padding: 20px 0px;
 }
 
